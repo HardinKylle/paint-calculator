@@ -10,12 +10,12 @@ import {
   formatTinRecommendation,
 } from "@/lib/formatting";
 
-interface EstimateSummaryProps {
+interface EstimatePanelProps {
   estimate: ProjectEstimate;
   compact?: boolean;
 }
 
-export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, compact = false }) => {
+export const EstimatePanel: React.FC<EstimatePanelProps> = ({ estimate, compact = false }) => {
   if (compact) {
     return (
       <Card className="p-4">
@@ -196,4 +196,3 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
     </Card>
   );
 };
-

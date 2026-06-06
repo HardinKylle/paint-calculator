@@ -214,5 +214,3 @@ export const ValidationPanel: React.FC = () => {
     </div>
   );
 };
-
-

@@ -18,13 +18,13 @@ const SAMPLE_ROOMS: ReferenceRoom[] = [
   { name: "Laundry", length: 2.2, width: 1.8 },
 ];
 
-interface FloorPlanReferenceProps {
+interface FloorPlanPanelProps {
   onAddRoom: (room: { name: string; length: number; width: number }) => void;
   onLoadSamplePlan?: () => void;
   showLoadSample?: boolean;
 }
 
-export const FloorPlanReference: React.FC<FloorPlanReferenceProps> = ({
+export const FloorPlanPanel: React.FC<FloorPlanPanelProps> = ({
   onAddRoom,
   onLoadSamplePlan,
   showLoadSample = false,
@@ -94,4 +94,3 @@ export const FloorPlanReference: React.FC<FloorPlanReferenceProps> = ({
     </div>
   );
 };
-

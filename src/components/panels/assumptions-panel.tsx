@@ -116,4 +116,3 @@ export const AssumptionsPanel: React.FC = () => {
     </div>
   );
 };
-

@@ -1,21 +1,23 @@
 "use client";
-
 import React, { useState } from "react";
-import { Paintbrush, Calculator, Info, Grid, ShieldCheck } from "lucide-react";
+import { Paintbrush, Calculator, Info, Grid, ShieldCheck, BookOpen } from "lucide-react";
 import type { RoomInput } from "@/types/estimate";
 import { DEFAULT_ROOMS, DEFAULT_ASSUMPTIONS } from "@/lib/defaults";
 import { calculateProjectEstimate } from "@/lib/calculator";
 import { RoomEditor } from "@/components/room-editor";
-import { EstimateSummary } from "@/components/estimate-summary";
-import { FloorPlanReference } from "@/components/floor-plan-reference";
-import { AssumptionsPanel } from "@/components/assumptions-panel";
-import { ValidationPanel } from "@/components/validation-panel";
+import {
+  EstimatePanel,
+  FloorPlanPanel,
+  AssumptionsPanel,
+  ValidationPanel,
+  CalculationPanel,
+} from "@/components/panels";
 import { CollapsiblePanel } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 export const CalculatorWorkspace: React.FC = () => {
   const [rooms, setRooms] = useState<RoomInput[]>([]);
-  const [activeTab, setActiveTab] = useState<"reference" | "assumptions" | "validation">("reference");
+  const [activeTab, setActiveTab] = useState<"reference" | "assumptions" | "validation" | "calculation">("reference");
 
   const projectEstimate = calculateProjectEstimate(rooms, DEFAULT_ASSUMPTIONS);
 
@@ -109,7 +111,7 @@ export const CalculatorWorkspace: React.FC = () => {
 
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div className="block lg:hidden space-y-3">
-          <EstimateSummary estimate={projectEstimate} compact={true} />
+          <EstimatePanel estimate={projectEstimate} compact={true} />
           
           <details className="group">
             <summary className="flex items-center justify-center gap-1.5 py-2 px-4 rounded-lg border border-stone-200 bg-white text-xs font-semibold text-stone-600 hover:text-stone-800 cursor-pointer select-none transition-colors list-none [&::-webkit-details-marker]:hidden">
@@ -117,7 +119,7 @@ export const CalculatorWorkspace: React.FC = () => {
               <span className="hidden group-open:inline">Hide Detailed Breakdown</span>
             </summary>
             <div className="mt-3">
-              <EstimateSummary estimate={projectEstimate} />
+              <EstimatePanel estimate={projectEstimate} />
             </div>
           </details>
         </div>
@@ -139,6 +141,7 @@ export const CalculatorWorkspace: React.FC = () => {
                 [
                   { id: "reference", label: "Floor Plan Reference", Icon: Grid },
                   { id: "assumptions", label: "Estimation Assumptions", Icon: Info },
+                  { id: "calculation", label: "Sample Walkthrough", Icon: BookOpen },
                   { id: "validation", label: "Engine Validation", Icon: ShieldCheck },
                 ] as const
               ).map(({ id, label, Icon }) => {
@@ -163,20 +166,21 @@ export const CalculatorWorkspace: React.FC = () => {
 
             <div className="pt-2">
               {activeTab === "reference" && (
-                <FloorPlanReference
+                <FloorPlanPanel
                   onAddRoom={handleRoomAddFromReference}
                   showLoadSample={rooms.length === 0}
                   onLoadSamplePlan={handleReset}
                 />
               )}
               {activeTab === "assumptions" && <AssumptionsPanel />}
+              {activeTab === "calculation" && <CalculationPanel />}
               {activeTab === "validation" && <ValidationPanel />}
             </div>
           </div>
         </section>
 
         <section className="hidden lg:flex lg:col-span-5 flex-col gap-6 lg:sticky lg:top-6">
-          <EstimateSummary estimate={projectEstimate} />
+          <EstimatePanel estimate={projectEstimate} />
         </section>
       </main>
 
@@ -188,7 +192,7 @@ export const CalculatorWorkspace: React.FC = () => {
               label: "Floor Plan Reference",
               Icon: Grid,
               component: (
-                <FloorPlanReference
+                <FloorPlanPanel
                   onAddRoom={handleRoomAddFromReference}
                   showLoadSample={rooms.length === 0}
                   onLoadSamplePlan={handleReset}
@@ -200,6 +204,12 @@ export const CalculatorWorkspace: React.FC = () => {
               label: "Estimation Assumptions",
               Icon: Info,
               component: <AssumptionsPanel />,
+            },
+            {
+              id: "calculation",
+              label: "Sample Walkthrough",
+              Icon: BookOpen,
+              component: <CalculationPanel />,
             },
             {
               id: "validation",
