@@ -4,6 +4,7 @@ import { Info, Grid, ShieldCheck, BookOpen } from "lucide-react";
 import type { RoomInput } from "@/types/estimate";
 import { DEFAULT_ROOMS, DEFAULT_ASSUMPTIONS } from "@/lib/defaults";
 import { calculateProjectEstimate } from "@/lib/calculator";
+import { PrintEstimate } from "@/components/print-estimate";
 import { RoomEditor } from "@/components/room-editor";
 import { PigmentaLogo } from "@/components/pigmenta-logo";
 import {
@@ -74,37 +75,34 @@ export const CalculatorWorkspace: React.FC = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col gap-8">
-      <header className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-800 via-slate-800 to-slate-900 p-8 text-white shadow-lg border border-slate-700/50">
-        <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-rose-500/10 blur-3xl" />
-        <div className="absolute left-1/3 bottom-0 h-32 w-32 rounded-full bg-orange-500/10 blur-2xl" />
-
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="flex items-start gap-4">
-            <PigmentaLogo className="h-14 w-14 shrink-0 drop-shadow-sm" priority />
+      <header className="bg-stone-900 border border-stone-850 shadow-md rounded-2xl p-5 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 print:hidden relative overflow-hidden">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5 w-full">
+          <div className="flex items-start sm:items-center gap-3.5">
+            <PigmentaLogo className="h-10 w-10 sm:h-12 sm:w-12 shrink-0 transition-transform duration-200 hover:-translate-y-0.5 cursor-pointer" priority />
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl bg-clip-text bg-gradient-to-r from-white via-stone-100 to-stone-300">
+              <h1 className="text-xl sm:text-3xl font-extrabold tracking-tight text-white">
                 Pigmenta Paint Calculator
               </h1>
-              <p className="text-sm text-stone-300 max-w-xl mt-1 leading-relaxed">
-                Estimate paint quantities, tin requirements, labour hours, and costs for residential interior walls and ceilings.
+              <p className="text-[11px] sm:text-xs text-stone-400 mt-1 leading-relaxed">
+                Estimate paint volumes, tin recommendations, labour hours, and costs for interior walls and ceilings.
               </p>
             </div>
           </div>
 
-          <div className="flex gap-4 justify-center md:justify-start md:self-auto border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
-            <div className="text-center min-w-[80px]">
-              <span className="block text-[10px] text-rose-300 font-bold uppercase tracking-wider">Rooms</span>
-              <span className="text-2xl font-extrabold">{rooms.length}</span>
+          <div className="flex gap-6 justify-start md:justify-start md:self-auto border-t md:border-t-0 md:border-l border-stone-800 pt-4 md:pt-0 pl-[54px] md:pl-8">
+            <div className="text-left min-w-[60px]">
+              <span className="block text-[9px] text-stone-500 font-bold uppercase tracking-wider">Rooms</span>
+              <span className="text-2xl font-bold text-white mt-0.5 block leading-none">{rooms.length}</span>
             </div>
-            <div className="text-center min-w-[100px]">
-              <span className="block text-[10px] text-rose-300 font-bold uppercase tracking-wider">Total Area</span>
-              <span className="text-2xl font-extrabold">{projectEstimate.totalPaintableAreaM2.toFixed(1)} m²</span>
+            <div className="text-left min-w-[80px]">
+              <span className="block text-[9px] text-stone-500 font-bold uppercase tracking-wider">Total Area</span>
+              <span className="text-2xl font-bold text-white mt-0.5 block leading-none">{projectEstimate.totalPaintableAreaM2.toFixed(1)} m²</span>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <main className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start print:hidden">
         <div className="block lg:hidden space-y-3">
           <EstimatePanel estimate={projectEstimate} compact={true} />
 
@@ -136,7 +134,7 @@ export const CalculatorWorkspace: React.FC = () => {
                 [
                   { id: "reference", label: "Floor Plan Reference", Icon: Grid },
                   { id: "assumptions", label: "Estimation Assumptions", Icon: Info },
-                  { id: "calculation", label: "Sample Walkthrough", Icon: BookOpen },
+                  { id: "calculation", label: "Calculation Walkthrough", Icon: BookOpen },
                   { id: "validation", label: "Engine Validation", Icon: ShieldCheck },
                 ] as const
               ).map(({ id, label, Icon }) => {
@@ -168,7 +166,7 @@ export const CalculatorWorkspace: React.FC = () => {
                 />
               )}
               {activeTab === "assumptions" && <AssumptionsPanel />}
-              {activeTab === "calculation" && <CalculationPanel />}
+              {activeTab === "calculation" && <CalculationPanel rooms={rooms} estimates={projectEstimate.rooms} />}
               {activeTab === "validation" && <ValidationPanel />}
             </div>
           </div>
@@ -179,7 +177,7 @@ export const CalculatorWorkspace: React.FC = () => {
         </section>
       </main>
 
-      <div className="block lg:hidden border-t border-stone-200 pt-8 mt-4 space-y-4">
+      <div className="block lg:hidden border-t border-stone-200 pt-8 mt-4 space-y-4 print:hidden">
         {(
           [
             {
@@ -202,9 +200,9 @@ export const CalculatorWorkspace: React.FC = () => {
             },
             {
               id: "calculation",
-              label: "Sample Walkthrough",
+              label: "Calculation Walkthrough",
               Icon: BookOpen,
-              component: <CalculationPanel />,
+              component: <CalculationPanel rooms={rooms} estimates={projectEstimate.rooms} />,
             },
             {
               id: "validation",
@@ -219,6 +217,9 @@ export const CalculatorWorkspace: React.FC = () => {
           </CollapsiblePanel>
         ))}
       </div>
+
+      {/* Print-Only Professional Document */}
+      <PrintEstimate rooms={rooms} projectEstimate={projectEstimate} />
     </div>
   );
 };

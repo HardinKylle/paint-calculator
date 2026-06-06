@@ -16,24 +16,24 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           "inline-flex items-center justify-center gap-1.5 rounded-lg transition-all duration-200 font-medium cursor-pointer",
           variant === "primary" &&
-            "bg-gradient-to-r from-rose-600 to-rose-500 text-white hover:from-rose-700 hover:to-rose-600 shadow-xs border-0 font-semibold",
+            "bg-stone-900 text-white hover:bg-stone-800 shadow-xs border-0 font-semibold transition-colors",
           variant === "secondary" &&
             "border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 transition-colors",
           variant === "destructive" &&
-            "border border-stone-200 bg-white text-red-600 hover:bg-red-50 hover:border-red-200 transition-colors",
+            "border border-stone-200 bg-white text-red-650 hover:bg-red-50 hover:border-red-200 transition-colors",
           variant === "dashed" &&
-            "w-full py-3 border-2 border-dashed border-stone-200 hover:border-rose-300 hover:bg-rose-50/10 text-stone-500 hover:text-rose-600 bg-transparent font-semibold text-xs rounded-xl",
+            "w-full py-3 border-2 border-dashed border-stone-200 hover:border-stone-350 hover:bg-stone-50 text-stone-500 hover:text-stone-850 bg-transparent font-semibold text-xs rounded-xl",
           variant === "toggle" &&
             cn(
-              "flex-1 text-xs py-1.5 border",
+              "flex-1 text-[11px] py-1.5 border font-semibold transition-colors rounded-md",
               active
-                ? "bg-rose-50 border-rose-200 text-rose-800"
-                : "bg-stone-50 border-stone-200 text-stone-400"
+                ? "bg-stone-900 border-stone-900 text-white shadow-xs"
+                : "bg-stone-100 border-stone-200 text-stone-500 hover:bg-stone-200/50 hover:text-stone-700"
             ),
           variant === "icon-trash" &&
-            "p-2 text-stone-400 hover:bg-red-50 hover:text-red-600 transition-colors rounded-lg",
+            "p-2 text-stone-400 hover:bg-red-50 hover:text-red-650 transition-colors rounded-lg",
           variant === "icon-add" &&
-            "h-6 w-6 rounded-md border border-stone-200 bg-white text-stone-600 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-colors",
+            "h-6 w-6 rounded-md border border-stone-200 bg-white text-stone-600 hover:bg-stone-50 hover:text-stone-900 hover:border-stone-300 transition-colors",
           
           variant !== "dashed" && variant !== "toggle" && variant !== "icon-trash" && variant !== "icon-add" && cn(
             size === "sm" && "py-1 px-2.5 text-[11px]",
