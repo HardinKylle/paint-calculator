@@ -6,7 +6,7 @@ import type { RoomInput } from "../types/estimate";
 import { DEFAULT_ROOMS, DEFAULT_ASSUMPTIONS } from "../lib/defaults";
 import { calculateProjectEstimate } from "../lib/calculator";
 import { RoomEditor } from "./room-editor";
-import { formatCurrency, formatArea, formatHours } from "../lib/formatting";
+import { EstimateSummary } from "./estimate-summary";
 
 export const CalculatorWorkspace: React.FC = () => {
   // Starts with an empty room list by default
@@ -93,6 +93,21 @@ export const CalculatorWorkspace: React.FC = () => {
 
       {/* Main Content Layout Grid */}
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Mobile-only compact estimate summary: displayed above Room Editor on small screens */}
+        <div className="block lg:hidden space-y-3">
+          <EstimateSummary estimate={projectEstimate} compact={true} />
+          
+          <details className="group">
+            <summary className="flex items-center justify-center gap-1.5 py-2 px-4 rounded-lg border border-stone-200 bg-white text-xs font-semibold text-stone-600 hover:text-stone-800 cursor-pointer select-none transition-colors list-none [&::-webkit-details-marker]:hidden">
+              <span className="group-open:hidden">Show Detailed Breakdown</span>
+              <span className="hidden group-open:inline">Hide Detailed Breakdown</span>
+            </summary>
+            <div className="mt-3">
+              <EstimateSummary estimate={projectEstimate} />
+            </div>
+          </details>
+        </div>
+
         {/* Left Column: Room Editor (Col Span 7) */}
         <section className="lg:col-span-7 flex flex-col gap-6">
           <RoomEditor
@@ -106,28 +121,9 @@ export const CalculatorWorkspace: React.FC = () => {
           />
         </section>
 
-        {/* Right Column: Basic Calculations Preview for Phase 5 (Col Span 5) */}
-        <section className="lg:col-span-5 flex flex-col gap-6 lg:sticky lg:top-6">
-          <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-xs">
-            <h2 className="text-lg font-semibold text-stone-900 mb-4">Estimate Preview</h2>
-            <div className="flex flex-col gap-3.5 text-sm text-stone-600">
-              <div className="flex justify-between items-center py-2 border-b border-stone-100">
-                <span>Total Project Area:</span>
-                <span className="font-semibold text-stone-950">{formatArea(projectEstimate.totalPaintableAreaM2)}</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-stone-100">
-                <span>Total Labour Hours:</span>
-                <span className="font-semibold text-stone-950">{formatHours(projectEstimate.totalLabourHours)}</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-stone-100">
-                <span>Estimated Cost (Subtotal):</span>
-                <span className="font-bold text-rose-800 text-lg">{formatCurrency(projectEstimate.totalProjectCostAud)}</span>
-              </div>
-            </div>
-            <p className="text-[11px] text-stone-400 mt-4 leading-relaxed">
-              * A detailed breakdown of materials, tin recommendation, and labour split will be loaded in the next phase.
-            </p>
-          </div>
+        {/* Right Column: Detailed Estimate Summary (Col Span 5) */}
+        <section className="hidden lg:flex lg:col-span-5 flex-col gap-6 lg:sticky lg:top-6">
+          <EstimateSummary estimate={projectEstimate} />
         </section>
       </main>
     </div>

@@ -74,7 +74,7 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
           </div>
           <h3 className="font-semibold text-stone-800 text-base">No rooms added</h3>
           <p className="text-sm text-stone-500 max-w-sm mt-1 mb-6">
-            Add a custom room from scratch, or load preloaded default dimensions from the sample floor plan to begin.
+            Add a custom room from scratch, or load the sample floor plan to begin.
           </p>
           <div className="flex gap-3">
             <button
