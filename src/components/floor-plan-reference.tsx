@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Plus, RotateCcw } from "lucide-react";
+import { Button, Card } from "@/components/ui";
 
 interface ReferenceRoom {
   name: string;
@@ -42,17 +43,18 @@ export const FloorPlanReference: React.FC<FloorPlanReferenceProps> = ({
         </div>
         
         {showLoadSample && onLoadSamplePlan && (
-          <button
+          <Button
             onClick={onLoadSamplePlan}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white py-1 px-2.5 text-[11px] font-medium text-stone-700 hover:bg-stone-50 transition-colors cursor-pointer"
+            variant="secondary"
+            size="sm"
           >
             <RotateCcw size={12} />
             Load Full Sample Plan
-          </button>
+          </Button>
         )}
       </div>
 
-      <div className="rounded-xl border border-stone-200 bg-white overflow-hidden shadow-xs">
+      <Card className="overflow-hidden">
         <table className="w-full border-collapse text-left text-xs">
           <thead>
             <tr className="bg-stone-50 border-b border-stone-200 text-stone-500 font-semibold">
@@ -75,20 +77,21 @@ export const FloorPlanReference: React.FC<FloorPlanReferenceProps> = ({
                     {ceilingArea.toFixed(2)} m²
                   </td>
                   <td className="px-4 py-2.5 text-center">
-                    <button
+                    <Button
                       onClick={() => onAddRoom(room)}
-                      className="inline-flex h-6 w-6 items-center justify-center rounded-md border border-stone-200 bg-white text-stone-600 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-colors cursor-pointer"
+                      variant="icon-add"
                       title={`Add ${room.name} to calculation list`}
                     >
                       <Plus size={12} />
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
-      </div>
+      </Card>
     </div>
   );
 };
+

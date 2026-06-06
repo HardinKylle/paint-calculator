@@ -1,7 +1,8 @@
 import React from "react";
 import { Plus, RotateCcw, Trash } from "lucide-react";
-import type { RoomInput, RoomEstimate } from "../types/estimate";
-import { RoomRow } from "./room-row";
+import type { RoomInput, RoomEstimate } from "@/types/estimate";
+import { RoomRow } from "@/components/room-row";
+import { Button } from "@/components/ui";
 
 interface RoomEditorProps {
   rooms: RoomInput[];
@@ -38,29 +39,29 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
         <div className="flex gap-2">
           {!isEmpty && (
             <>
-              <button
+              <Button
                 onClick={onClearAll}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white py-1.5 px-3 text-xs font-medium text-red-600 hover:bg-red-50 hover:border-red-200 transition-colors cursor-pointer"
+                variant="destructive"
                 title="Clear all rooms"
               >
                 <Trash size={14} />
                 Clear All
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={onResetToDefaults}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white py-1.5 px-3 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors cursor-pointer"
+                variant="secondary"
                 title="Load default sample floor plan rooms"
               >
                 <RotateCcw size={14} />
                 Load Sample Plan
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={onRoomAdd}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-rose-500 to-orange-500 py-1.5 px-4 text-xs font-semibold text-white hover:from-rose-600 hover:to-orange-600 transition-all shadow-xs cursor-pointer border-0"
+                variant="primary"
               >
                 <Plus size={14} />
                 Add Room
-              </button>
+              </Button>
             </>
           )}
         </div>
@@ -77,20 +78,22 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
             Add a custom room from scratch, or load the sample floor plan to begin.
           </p>
           <div className="flex gap-3">
-            <button
+            <Button
               onClick={onResetToDefaults}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white py-2 px-4 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors cursor-pointer"
+              variant="secondary"
+              size="lg"
             >
               <RotateCcw size={14} />
               Load Sample Plan
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={onRoomAdd}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-rose-500 to-orange-500 py-2 px-5 text-xs font-semibold text-white hover:from-rose-600 hover:to-orange-600 transition-all shadow-xs cursor-pointer border-0"
+              variant="primary"
+              size="lg"
             >
               <Plus size={14} />
               Add First Room
-            </button>
+            </Button>
           </div>
         </div>
       ) : (
@@ -111,15 +114,17 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
           })}
 
           {/* Quick Add button at the bottom of the list */}
-          <button
+          <Button
             onClick={onRoomAdd}
-            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border-2 border-dashed border-stone-200 hover:border-rose-300 hover:bg-rose-50/10 text-stone-500 hover:text-rose-600 transition-all font-semibold text-xs cursor-pointer bg-transparent mt-2"
+            variant="dashed"
+            className="mt-2"
           >
             <Plus size={14} />
             Add Another Room
-          </button>
+          </Button>
         </div>
       )}
     </div>
   );
 };
+

@@ -1,13 +1,14 @@
 import React from "react";
 import { Paintbrush, Clock, HelpCircle } from "lucide-react";
-import type { ProjectEstimate } from "../types/estimate";
+import type { ProjectEstimate } from "@/types/estimate";
+import { Card } from "@/components/ui";
 import {
   formatCurrency,
   formatArea,
   formatLitres,
   formatHours,
   formatTinRecommendation,
-} from "../lib/formatting";
+} from "@/lib/formatting";
 
 interface EstimateSummaryProps {
   estimate: ProjectEstimate;
@@ -17,7 +18,7 @@ interface EstimateSummaryProps {
 export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, compact = false }) => {
   if (compact) {
     return (
-      <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-xs">
+      <Card className="p-4">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <div>
             <span className="block text-[10px] font-semibold uppercase tracking-wider text-stone-400">
@@ -45,12 +46,12 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
             </div>
           </div>
         </div>
-      </div>
+      </Card>
     );
   }
 
   return (
-    <div className="rounded-xl border border-stone-200 bg-white shadow-xs overflow-hidden">
+    <Card className="overflow-hidden">
       {/* Top Banner: Prominent Total Cost */}
       <div className="bg-slate-900 p-6 text-white text-center relative overflow-hidden">
         {/* Subtle decorative background gradient representing modern slate architectural tone */}
@@ -100,7 +101,7 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
         {/* Detail Cards */}
         <div className="flex flex-col gap-4">
           {/* Section: Paint Materials */}
-          <div className="rounded-xl border border-stone-100 bg-stone-50/30 p-4">
+          <Card className="border-stone-100 bg-stone-50/30 p-4">
             <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold text-sm">
               <Paintbrush size={16} className="text-rose-600" />
               <span>Paint Materials Estimate</span>
@@ -166,10 +167,10 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
                 </span>
               </div>
             </div>
-          </div>
+          </Card>
 
           {/* Section: Labour */}
-          <div className="rounded-xl border border-stone-100 bg-stone-50/30 p-4">
+          <Card className="border-stone-100 bg-stone-50/30 p-4">
             <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold text-sm">
               <Clock size={16} className="text-rose-600" />
               <span>Labour Estimate</span>
@@ -196,9 +197,10 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
                 </span>
               </div>
             </div>
-          </div>
+          </Card>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
+

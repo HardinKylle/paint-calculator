@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { Paintbrush, Calculator } from "lucide-react";
-import type { RoomInput } from "../types/estimate";
-import { DEFAULT_ROOMS, DEFAULT_ASSUMPTIONS } from "../lib/defaults";
-import { calculateProjectEstimate } from "../lib/calculator";
-import { RoomEditor } from "./room-editor";
-import { EstimateSummary } from "./estimate-summary";
-import { ChevronDown, Info, Grid, ShieldCheck } from "lucide-react";
-import { FloorPlanReference } from "./floor-plan-reference";
-import { AssumptionsPanel } from "./assumptions-panel";
-import { ValidationPanel } from "./validation-panel";
+import { Paintbrush, Calculator, Info, Grid, ShieldCheck } from "lucide-react";
+import type { RoomInput } from "@/types/estimate";
+import { DEFAULT_ROOMS, DEFAULT_ASSUMPTIONS } from "@/lib/defaults";
+import { calculateProjectEstimate } from "@/lib/calculator";
+import { RoomEditor } from "@/components/room-editor";
+import { EstimateSummary } from "@/components/estimate-summary";
+import { FloorPlanReference } from "@/components/floor-plan-reference";
+import { AssumptionsPanel } from "@/components/assumptions-panel";
+import { ValidationPanel } from "@/components/validation-panel";
+import { CollapsiblePanel } from "@/components/ui";
+import { cn } from "@/lib/utils";
 
 export const CalculatorWorkspace: React.FC = () => {
   // Starts with an empty room list by default
@@ -80,7 +81,7 @@ export const CalculatorWorkspace: React.FC = () => {
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-start gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-rose-450">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-rose-400">
               <Calculator size={30} strokeWidth={1.5} />
             </div>
             <div>
@@ -144,39 +145,30 @@ export const CalculatorWorkspace: React.FC = () => {
           <div className="hidden lg:flex flex-col gap-5 border-t border-stone-200 pt-8 mt-4">
             {/* Tabs Header */}
             <div className="flex border-b border-stone-200 text-xs font-semibold text-stone-500">
-              <button
-                onClick={() => setActiveTab("reference")}
-                className={`flex items-center gap-1.5 px-4 py-3 border-b-2 transition-all cursor-pointer ${
-                  activeTab === "reference"
-                    ? "border-rose-600 text-rose-600 font-bold"
-                    : "border-transparent hover:text-stone-800"
-                }`}
-              >
-                <Grid size={14} />
-                Floor Plan Reference
-              </button>
-              <button
-                onClick={() => setActiveTab("assumptions")}
-                className={`flex items-center gap-1.5 px-4 py-3 border-b-2 transition-all cursor-pointer ${
-                  activeTab === "assumptions"
-                    ? "border-rose-600 text-rose-600 font-bold"
-                    : "border-transparent hover:text-stone-800"
-                }`}
-              >
-                <Info size={14} />
-                Estimation Assumptions
-              </button>
-              <button
-                onClick={() => setActiveTab("validation")}
-                className={`flex items-center gap-1.5 px-4 py-3 border-b-2 transition-all cursor-pointer ${
-                  activeTab === "validation"
-                    ? "border-rose-600 text-rose-600 font-bold"
-                    : "border-transparent hover:text-stone-800"
-                }`}
-              >
-                <ShieldCheck size={14} />
-                Engine Validation
-              </button>
+              {(
+                [
+                  { id: "reference", label: "Floor Plan Reference", Icon: Grid },
+                  { id: "assumptions", label: "Estimation Assumptions", Icon: Info },
+                  { id: "validation", label: "Engine Validation", Icon: ShieldCheck },
+                ] as const
+              ).map(({ id, label, Icon }) => {
+                const active = activeTab === id;
+                return (
+                  <button
+                    key={id}
+                    onClick={() => setActiveTab(id)}
+                    className={cn(
+                      "flex items-center gap-1.5 px-4 py-3 border-b-2 transition-all cursor-pointer",
+                      active
+                        ? "border-rose-600 text-rose-600 font-bold"
+                        : "border-transparent hover:text-stone-800"
+                    )}
+                  >
+                    <Icon size={14} />
+                    {label}
+                  </button>
+                );
+              })}
             </div>
 
             {/* Tab Contents */}
@@ -202,49 +194,41 @@ export const CalculatorWorkspace: React.FC = () => {
 
       {/* Mobile-only collapsible footer panels */}
       <div className="block lg:hidden border-t border-stone-200 pt-8 mt-4 space-y-4">
-        <details className="group border border-stone-200 rounded-xl bg-white overflow-hidden shadow-xs">
-          <summary className="flex items-center justify-between px-4 py-3 text-xs font-semibold text-stone-600 cursor-pointer select-none bg-stone-50/50 hover:bg-stone-50 list-none [&::-webkit-details-marker]:hidden">
-            <span className="flex items-center gap-1.5">
-              <Grid size={14} className="text-stone-400" />
-              Floor Plan Reference
-            </span>
-            <ChevronDown size={14} className="text-stone-400 group-open:rotate-180 transition-transform duration-200" />
-          </summary>
-          <div className="p-4 border-t border-stone-200 bg-stone-50/20">
-            <FloorPlanReference
-              onAddRoom={handleRoomAddFromReference}
-              showLoadSample={rooms.length === 0}
-              onLoadSamplePlan={handleReset}
-            />
-          </div>
-        </details>
-
-        <details className="group border border-stone-200 rounded-xl bg-white overflow-hidden shadow-xs">
-          <summary className="flex items-center justify-between px-4 py-3 text-xs font-semibold text-stone-600 cursor-pointer select-none bg-stone-50/50 hover:bg-stone-50 list-none [&::-webkit-details-marker]:hidden">
-            <span className="flex items-center gap-1.5">
-              <Info size={14} className="text-stone-400" />
-              Estimation Assumptions
-            </span>
-            <ChevronDown size={14} className="text-stone-400 group-open:rotate-180 transition-transform duration-200" />
-          </summary>
-          <div className="p-4 border-t border-stone-200 bg-stone-50/20">
-            <AssumptionsPanel />
-          </div>
-        </details>
-
-        <details className="group border border-stone-200 rounded-xl bg-white overflow-hidden shadow-xs">
-          <summary className="flex items-center justify-between px-4 py-3 text-xs font-semibold text-stone-600 cursor-pointer select-none bg-stone-50/50 hover:bg-stone-50 list-none [&::-webkit-details-marker]:hidden">
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck size={14} className="text-stone-400" />
-              Engine Validation Checks
-            </span>
-            <ChevronDown size={14} className="text-stone-400 group-open:rotate-180 transition-transform duration-200" />
-          </summary>
-          <div className="p-4 border-t border-stone-200 bg-stone-50/20">
-            <ValidationPanel />
-          </div>
-        </details>
+        {(
+          [
+            {
+              id: "reference",
+              label: "Floor Plan Reference",
+              Icon: Grid,
+              component: (
+                <FloorPlanReference
+                  onAddRoom={handleRoomAddFromReference}
+                  showLoadSample={rooms.length === 0}
+                  onLoadSamplePlan={handleReset}
+                />
+              ),
+            },
+            {
+              id: "assumptions",
+              label: "Estimation Assumptions",
+              Icon: Info,
+              component: <AssumptionsPanel />,
+            },
+            {
+              id: "validation",
+              label: "Engine Validation Checks",
+              Icon: ShieldCheck,
+              component: <ValidationPanel />,
+            },
+          ] as const
+        ).map(({ id, label, Icon, component }) => (
+          <CollapsiblePanel key={id} label={label} icon={Icon}>
+            {component}
+          </CollapsiblePanel>
+        ))}
       </div>
     </div>
   );
 };
+
+

@@ -1,7 +1,8 @@
 import React from "react";
 import { Trash2 } from "lucide-react";
-import type { RoomInput, RoomEstimate } from "../types/estimate";
-import { formatCurrency, formatArea, formatLitres, formatHours } from "../lib/formatting";
+import type { RoomInput, RoomEstimate } from "@/types/estimate";
+import { formatCurrency, formatArea, formatLitres, formatHours } from "@/lib/formatting";
+import { Button, Input, Select, Label, Card } from "@/components/ui";
 
 interface RoomRowProps {
   room: RoomInput;
@@ -51,33 +52,32 @@ export const RoomRow: React.FC<RoomRowProps> = ({
   };
 
   return (
-    <div className="group relative rounded-xl border border-stone-200 bg-white p-5 shadow-xs transition-all duration-300 hover:border-rose-200 hover:shadow-md">
+    <Card hoverable className="group relative p-5">
       {/* Top Header */}
       <div className="flex items-center justify-between gap-4 mb-4">
-        <input
+        <Input
           type="text"
           value={room.name}
           aria-label="Room Name"
           onChange={(e) => handleChange("name", e.target.value)}
           placeholder="Room Name"
-          className="font-semibold text-lg text-stone-900 border-b border-transparent hover:border-stone-300 focus:border-rose-500 focus:outline-hidden py-0.5 px-1 rounded-sm w-full max-w-[200px]"
+          variant="seamless"
+          className="max-w-[200px]"
         />
-        <button
+        <Button
           onClick={onRemove}
-          className="rounded-lg p-2 text-stone-400 hover:bg-red-50 hover:text-red-600 transition-colors duration-200 cursor-pointer"
+          variant="icon-trash"
           title="Remove room"
         >
           <Trash2 size={18} />
-        </button>
+        </Button>
       </div>
 
       {/* Grid Inputs */}
       <div className="grid grid-cols-3 gap-3 mb-4">
         <div>
-          <label htmlFor={`length-${room.id}`} className="block text-xs font-medium text-stone-500 mb-1">
-            Length (m)
-          </label>
-          <input
+          <Label htmlFor={`length-${room.id}`}>Length (m)</Label>
+          <Input
             id={`length-${room.id}`}
             type="number"
             min="0"
@@ -85,14 +85,11 @@ export const RoomRow: React.FC<RoomRowProps> = ({
             value={room.length === 0 ? "" : room.length}
             onChange={(e) => handleChange("length", e.target.value)}
             placeholder="3.5"
-            className="w-full rounded-lg border border-stone-200 bg-stone-50/50 py-1.5 px-3 text-sm text-stone-900 focus:border-rose-500 focus:bg-white focus:outline-hidden"
           />
         </div>
         <div>
-          <label htmlFor={`width-${room.id}`} className="block text-xs font-medium text-stone-500 mb-1">
-            Width (m)
-          </label>
-          <input
+          <Label htmlFor={`width-${room.id}`}>Width (m)</Label>
+          <Input
             id={`width-${room.id}`}
             type="number"
             min="0"
@@ -100,14 +97,11 @@ export const RoomRow: React.FC<RoomRowProps> = ({
             value={room.width === 0 ? "" : room.width}
             onChange={(e) => handleChange("width", e.target.value)}
             placeholder="3.5"
-            className="w-full rounded-lg border border-stone-200 bg-stone-50/50 py-1.5 px-3 text-sm text-stone-900 focus:border-rose-500 focus:bg-white focus:outline-hidden"
           />
         </div>
         <div>
-          <label htmlFor={`ceiling-${room.id}`} className="block text-xs font-medium text-stone-500 mb-1">
-            Ceiling (m)
-          </label>
-          <input
+          <Label htmlFor={`ceiling-${room.id}`}>Ceiling (m)</Label>
+          <Input
             id={`ceiling-${room.id}`}
             type="number"
             min="0.1"
@@ -115,7 +109,6 @@ export const RoomRow: React.FC<RoomRowProps> = ({
             value={room.ceilingHeight || ""}
             onChange={(e) => handleChange("ceilingHeight", e.target.value)}
             placeholder="2.4"
-            className="w-full rounded-lg border border-stone-200 bg-stone-50/50 py-1.5 px-3 text-sm text-stone-900 focus:border-rose-500 focus:bg-white focus:outline-hidden"
           />
         </div>
       </div>
@@ -125,62 +118,55 @@ export const RoomRow: React.FC<RoomRowProps> = ({
         <div>
           <span className="block text-xs font-medium text-stone-500 mb-1.5">Surface Toggles</span>
           <div className="flex gap-2">
-            <button
+            <Button
               onClick={() => handleChange("paintWalls", !room.paintWalls)}
               aria-pressed={room.paintWalls}
-              className={`flex-1 text-xs py-1.5 rounded-lg border font-medium transition-all duration-200 cursor-pointer ${
-                room.paintWalls
-                  ? "bg-rose-50 border-rose-200 text-rose-800"
-                  : "bg-stone-50 border-stone-200 text-stone-400"
-              }`}
+              variant="toggle"
+              active={room.paintWalls}
             >
               Walls
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => handleChange("paintCeilings", !room.paintCeilings)}
               aria-pressed={room.paintCeilings}
-              className={`flex-1 text-xs py-1.5 rounded-lg border font-medium transition-all duration-200 cursor-pointer ${
-                room.paintCeilings
-                  ? "bg-rose-50 border-rose-200 text-rose-800"
-                  : "bg-stone-50 border-stone-200 text-stone-400"
-              }`}
+              variant="toggle"
+              active={room.paintCeilings}
             >
               Ceiling
-            </button>
+            </Button>
           </div>
         </div>
 
         <div>
-          <label htmlFor={`coats-${room.id}`} className="block text-xs font-medium text-stone-500 mb-1.5">
+          <Label htmlFor={`coats-${room.id}`} className="mb-1.5">
             Coats
-          </label>
-          <select
+          </Label>
+          <Select
             id={`coats-${room.id}`}
             value={room.coats}
             onChange={(e) => handleChange("coats", e.target.value)}
-            className="w-full rounded-lg border border-stone-200 bg-stone-50 py-1.5 px-2 text-xs text-stone-900 focus:border-rose-500 focus:bg-white focus:outline-hidden cursor-pointer"
           >
             <option value="1">1 Coat</option>
             <option value="2">2 Coats</option>
             <option value="3">3 Coats</option>
             <option value="4">4 Coats</option>
-          </select>
+          </Select>
         </div>
 
         <div className="col-span-2 sm:col-span-2">
-          <label htmlFor={`quality-${room.id}`} className="block text-xs font-medium text-stone-500 mb-1.5">
+          <Label htmlFor={`quality-${room.id}`} className="mb-1.5">
             Paint Quality
-          </label>
-          <select
+          </Label>
+          <Select
             id={`quality-${room.id}`}
             value={room.paintQuality}
             onChange={(e) => handleChange("paintQuality", e.target.value)}
-            className="w-full rounded-lg border border-stone-200 bg-stone-50 py-1.5 px-2.5 text-xs text-stone-900 focus:border-rose-500 focus:bg-white focus:outline-hidden cursor-pointer"
+            className="px-2.5"
           >
             <option value="budget">Budget ($18/L)</option>
             <option value="standard">Standard ($28/L)</option>
             <option value="premium">Premium ($40/L)</option>
-          </select>
+          </Select>
         </div>
       </div>
 
@@ -196,6 +182,7 @@ export const RoomRow: React.FC<RoomRowProps> = ({
           <span className="font-semibold text-rose-900 text-sm">{formatCurrency(estimate.totalCostAud)}</span>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
+

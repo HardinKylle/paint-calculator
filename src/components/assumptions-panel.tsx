@@ -1,6 +1,24 @@
 import React from "react";
 import { Info, HelpCircle } from "lucide-react";
 
+const EXCLUSIONS = [
+  "Doors",
+  "Windows",
+  "Skirting boards",
+  "Architraves",
+  "Cornices",
+  "Feature walls",
+  "Exterior painting",
+  "Surface preparation",
+  "Repairs",
+  "Priming",
+  "Special finishes",
+  "Furniture moving",
+  "GST",
+  "Travel",
+  "Minimum call-out fees",
+];
+
 export const AssumptionsPanel: React.FC = () => {
   return (
     <div className="flex flex-col gap-6">
@@ -87,68 +105,15 @@ export const AssumptionsPanel: React.FC = () => {
           Project Exclusions (Out of Scope)
         </h4>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-2 gap-x-4 text-[11px] text-stone-500 list-disc pl-1">
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Doors
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Windows
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Skirting boards
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Architraves
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Cornices
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Feature walls
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Exterior painting
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Surface preparation
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Repairs
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Priming
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Special finishes
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Furniture moving
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            GST
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Travel
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
-            Minimum call-out fees
-          </div>
+          {EXCLUSIONS.map((item) => (
+            <div key={item} className="flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-stone-300" />
+              {item}
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
+
