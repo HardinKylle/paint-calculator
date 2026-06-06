@@ -53,7 +53,6 @@ export const RoomRow: React.FC<RoomRowProps> = ({
 
   return (
     <Card hoverable className="group relative p-5">
-      {/* Top Header */}
       <div className="flex items-center justify-between gap-4 mb-4">
         <Input
           type="text"
@@ -73,7 +72,6 @@ export const RoomRow: React.FC<RoomRowProps> = ({
         </Button>
       </div>
 
-      {/* Grid Inputs */}
       <div className="grid grid-cols-3 gap-3 mb-4">
         <div>
           <Label htmlFor={`length-${room.id}`}>Length (m)</Label>
@@ -113,7 +111,6 @@ export const RoomRow: React.FC<RoomRowProps> = ({
         </div>
       </div>
 
-      {/* Controls Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4 pt-3 border-t border-stone-100">
         <div>
           <span className="block text-xs font-medium text-stone-500 mb-1.5">Surface Toggles</span>
@@ -170,7 +167,6 @@ export const RoomRow: React.FC<RoomRowProps> = ({
         </div>
       </div>
 
-      {/* Room Estimate Live Preview Footer */}
       <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-stone-100 text-xs bg-stone-50/50 -mx-5 -mb-5 px-5 py-3 rounded-b-xl">
         <div className="flex gap-3 text-stone-500">
           <span>Area: <strong>{formatArea(estimate.paintableWallAreaM2 + estimate.paintableCeilingAreaM2)}</strong></span>

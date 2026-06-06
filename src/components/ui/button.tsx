@@ -15,7 +15,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type="button"
         className={cn(
           "inline-flex items-center justify-center gap-1.5 rounded-lg transition-all duration-200 font-medium cursor-pointer",
-          // Variants
           variant === "primary" &&
             "bg-gradient-to-r from-rose-500 to-orange-500 text-white hover:from-rose-600 hover:to-orange-600 shadow-xs border-0 font-semibold",
           variant === "secondary" &&
@@ -36,7 +35,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           variant === "icon-add" &&
             "h-6 w-6 rounded-md border border-stone-200 bg-white text-stone-600 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 transition-colors",
           
-          // Sizes (applicable only to buttons that are not dashed, toggle, or icon variants)
           variant !== "dashed" && variant !== "toggle" && variant !== "icon-trash" && variant !== "icon-add" && cn(
             size === "sm" && "py-1 px-2.5 text-[11px]",
             size === "md" && "py-1.5 px-3 text-xs",

@@ -27,7 +27,6 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Top Header Actions */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h2 className="text-xl font-semibold text-stone-900">Room Configurations</h2>
@@ -67,7 +66,6 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
         </div>
       </div>
 
-      {/* Empty State */}
       {isEmpty ? (
         <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-stone-200 py-12 px-6 bg-stone-50/50 text-center">
           <div className="rounded-full bg-stone-100 p-4 mb-3 text-stone-400">
@@ -97,7 +95,6 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
           </div>
         </div>
       ) : (
-        /* Room Cards List */
         <div className="flex flex-col gap-4">
           {rooms.map((room, index) => {
             const estimate = estimates[index];
@@ -113,7 +110,6 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
             );
           })}
 
-          {/* Quick Add button at the bottom of the list */}
           <Button
             onClick={onRoomAdd}
             variant="dashed"

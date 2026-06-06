@@ -14,11 +14,9 @@ import { CollapsiblePanel } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 export const CalculatorWorkspace: React.FC = () => {
-  // Starts with an empty room list by default
   const [rooms, setRooms] = useState<RoomInput[]>([]);
   const [activeTab, setActiveTab] = useState<"reference" | "assumptions" | "validation">("reference");
 
-  // Live calculation of project-level estimate
   const projectEstimate = calculateProjectEstimate(rooms, DEFAULT_ASSUMPTIONS);
 
   const handleRoomUpdate = (index: number, updated: RoomInput) => {
@@ -73,9 +71,7 @@ export const CalculatorWorkspace: React.FC = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col gap-8">
-      {/* Premium Branded Header */}
       <header className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-800 via-slate-800 to-slate-900 p-8 text-white shadow-lg border border-slate-700/50">
-        {/* Decorative background grid/blobs representing copper/coral paint splashes */}
         <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-rose-500/10 blur-3xl" />
         <div className="absolute left-1/3 bottom-0 h-32 w-32 rounded-full bg-orange-500/10 blur-2xl" />
 
@@ -98,7 +94,6 @@ export const CalculatorWorkspace: React.FC = () => {
             </div>
           </div>
           
-          {/* Quick Stats Banner */}
           <div className="flex gap-4 self-start md:self-auto border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
             <div className="text-center min-w-[80px]">
               <span className="block text-[10px] text-rose-300 font-bold uppercase tracking-wider">Rooms</span>
@@ -112,9 +107,7 @@ export const CalculatorWorkspace: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Content Layout Grid */}
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Mobile-only compact estimate summary: displayed above Room Editor on small screens */}
         <div className="block lg:hidden space-y-3">
           <EstimateSummary estimate={projectEstimate} compact={true} />
           
@@ -129,7 +122,6 @@ export const CalculatorWorkspace: React.FC = () => {
           </details>
         </div>
 
-        {/* Left Column: Room Editor & Info Tabs (Col Span 7) */}
         <section className="lg:col-span-7 flex flex-col gap-8">
           <RoomEditor
             rooms={rooms}
@@ -141,9 +133,7 @@ export const CalculatorWorkspace: React.FC = () => {
             onClearAll={handleClearAll}
           />
 
-          {/* Desktop Info Panels (Tabs Layout) */}
           <div className="hidden lg:flex flex-col gap-5 border-t border-stone-200 pt-8 mt-4">
-            {/* Tabs Header */}
             <div className="flex border-b border-stone-200 text-xs font-semibold text-stone-500">
               {(
                 [
@@ -171,7 +161,6 @@ export const CalculatorWorkspace: React.FC = () => {
               })}
             </div>
 
-            {/* Tab Contents */}
             <div className="pt-2">
               {activeTab === "reference" && (
                 <FloorPlanReference
@@ -186,13 +175,11 @@ export const CalculatorWorkspace: React.FC = () => {
           </div>
         </section>
 
-        {/* Right Column: Detailed Estimate Summary (Col Span 5) */}
         <section className="hidden lg:flex lg:col-span-5 flex-col gap-6 lg:sticky lg:top-6">
           <EstimateSummary estimate={projectEstimate} />
         </section>
       </main>
 
-      {/* Mobile-only collapsible footer panels */}
       <div className="block lg:hidden border-t border-stone-200 pt-8 mt-4 space-y-4">
         {(
           [

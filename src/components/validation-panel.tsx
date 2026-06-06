@@ -158,7 +158,6 @@ export const ValidationPanel: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {VALIDATION_EXAMPLES.map((example) => {
-          // Compute the live estimate for this validation room
           const liveEst = calculateRoomEstimate(example.input, DEFAULT_ASSUMPTIONS);
           
           return (
@@ -170,7 +169,6 @@ export const ValidationPanel: React.FC = () => {
                 </p>
               </div>
 
-              {/* Specs Badge */}
               <div className="flex flex-wrap gap-2 text-[10px] bg-stone-50 border border-stone-100 p-2 rounded-lg font-medium text-stone-600">
                 <span>L: {example.input.length}m</span>
                 <span className="text-stone-300">|</span>
@@ -183,7 +181,6 @@ export const ValidationPanel: React.FC = () => {
                 <span>Coats: {example.input.coats}</span>
               </div>
 
-              {/* Side by side stats */}
               <div className="flex flex-col text-xs mt-1">
                 {getComparisonRows(example, liveEst).map((row) => (
                   <div key={row.label}>
@@ -199,7 +196,6 @@ export const ValidationPanel: React.FC = () => {
                   </div>
                 ))}
 
-                {/* Total Cost */}
                 <div className="mt-4 bg-stone-50/50 border-t border-stone-100 p-4 -mx-4 -mb-4 rounded-b-xl">
                   <span className="block text-[10px] uppercase font-bold tracking-wider text-stone-400 mb-1">Total Estimate</span>
                   <MatchBadge 

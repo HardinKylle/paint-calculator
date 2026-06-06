@@ -52,9 +52,7 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
 
   return (
     <Card className="overflow-hidden">
-      {/* Top Banner: Prominent Total Cost */}
       <div className="bg-slate-900 p-6 text-white text-center relative overflow-hidden">
-        {/* Subtle decorative background gradient representing modern slate architectural tone */}
         <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 via-slate-800/40 to-slate-900 pointer-events-none" />
         
         <p className="text-xs font-semibold uppercase tracking-wider text-rose-300 relative z-10">
@@ -68,9 +66,7 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
         </p>
       </div>
 
-      {/* Main Breakdown Section */}
       <div className="p-6 flex flex-col gap-6">
-        {/* Row 1: Areas and Labour Hours */}
         <div className="grid grid-cols-3 gap-4">
           <div className="rounded-lg bg-stone-50 p-3 text-center border border-stone-100">
             <span className="block text-[10px] font-medium uppercase tracking-wide text-stone-500 mb-0.5">
@@ -98,9 +94,7 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
           </div>
         </div>
 
-        {/* Detail Cards */}
         <div className="flex flex-col gap-4">
-          {/* Section: Paint Materials */}
           <Card className="border-stone-100 bg-stone-50/30 p-4">
             <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold text-sm">
               <Paintbrush size={16} className="text-rose-600" />
@@ -169,7 +163,6 @@ export const EstimateSummary: React.FC<EstimateSummaryProps> = ({ estimate, comp
             </div>
           </Card>
 
-          {/* Section: Labour */}
           <Card className="border-stone-100 bg-stone-50/30 p-4">
             <div className="flex items-center gap-2 mb-3 text-stone-800 font-semibold text-sm">
               <Clock size={16} className="text-rose-600" />
