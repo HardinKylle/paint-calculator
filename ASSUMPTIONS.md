@@ -78,6 +78,7 @@ Labour hours are calculated on actual painted surfaces (coats-adjusted) rather t
     $$WallPaintCost = WallPaintLitresPurchased \times PaintPrice$$
     $$CeilingPaintCost = CeilingPaintLitresPurchased \times PaintPrice$$
     $$TotalPaintCost = WallPaintCost + CeilingPaintCost$$
+    *Note: Because project paint totals are calculated by aggregating raw litres across all rooms by paint quality before recommending tins (bulk purchasing optimization), the recommended project tins and total paint cost may be lower than the sum of individual room estimates (which assume separate paint purchasing per room).*
 *   **Total Project Estimate:**
     $$TotalEstimate = TotalPaintCost + LabourCost$$
 

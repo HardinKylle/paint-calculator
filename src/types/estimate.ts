@@ -24,6 +24,7 @@ export interface EstimateAssumptions {
 export interface TinRecommendation {
   tinSize: number;
   count: number;
+  paintQuality?: PaintQuality;
 }
 
 export interface RoomEstimate {
