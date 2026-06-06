@@ -8,24 +8,24 @@ This document outlines the estimation model, default values, rounding rules, and
 
 The calculator uses the following default values for a standard residential painting estimate:
 
-| Assumption Parameter | Default Value | Rationale & Source Reference |
+| Assumption Parameter | Default Value | Source & Rationale |
 | :--- | :--- | :--- |
-| **Default Ceiling Height** | `2.4 m` | Standard Australian residential ceiling height for habitable rooms. (Reference: [Australian Building Codes Board (ABCB) NCC 2022 Part H1D2](https://ncc.abcb.gov.au/)). |
-| **Paint Coverage Rate** | `14 m²/L` per coat | Dulux Australia Wash & Wear specifies a theoretical coverage of up to `16 m²/L` (see [Dulux Wash & Wear Datasheet](https://www.dulux.com.au/)), but practical coverage is assumed at `14 m²/L` to account for plasterboard surface absorption and roller losses. |
-| **Wall Labour Productivity** | `10 m²/hour` | Standard trade estimation rate for rolling out walls on prepped plasterboard (Reference: [Rawlinsons Australian Construction Handbook](https://www.rawlhouse.com/)). |
-| **Ceiling Labour Productivity** | `7 m²/hour` | Slower productivity due to overhead working fatigue, setup, and safety considerations (Reference: [Rawlinsons Australian Construction Handbook](https://www.rawlhouse.com/)). |
-| **Labour Hourly Rate** | `$65 AUD / hour` | Average professional residential painter charge-out rate in Australia (Reference: [Indeed Australia Painter Salaries](https://au.indeed.com/career/painter/salaries) & [PayScale Australia Painter Hourly Rate](https://www.payscale.com/research/AU/Job=Painter%2C_Construction_and_Maintenance/Hourly_Rate)). |
-| **Common Paint Tin Sizes** | `15L, 10L, 4L, 2L, 1L` | Standard retail and trade paint container sizes available in Australian retail stores (Reference: [Bunnings Warehouse Paint](https://www.bunnings.com.au/)). |
+| **Default Ceiling Height** | `2.4 m` | NCC 2022 Housing Provisions Part 10.3.1 lists habitable rooms excluding kitchens as not less than `2.4 m` ([ABCB NCC Part 10.3 Room heights](https://ncc.abcb.gov.au/editions/ncc-2022/adopted/housing-provisions/10-health-and-amenity/part-103-room-heights)). |
+| **Paint Coverage Rate** | `14 m²/L` per coat | British Paints Paint & Prime Interior Low Sheen lists coverage as `14m²/L`; this supports the calculator's conservative interior paint coverage value. Dulux also publishes a more optimistic general wall-paint guide of about `16 m²/L`, so `14 m²/L` is intentionally conservative ([British Paints Paint & Prime Interior Low Sheen](https://www.britishpaints.com.au/paint-products/ceiling-paint/paint-prime-interior-low-sheen/); [Dulux Paint Calculator](https://www.dulux.com.au/services/paint-calculator/)). |
+| **Wall Labour Productivity** | `10 m²/hour` | Resene's professional painter productivity table says to calculate labour as `Area x Factor = Hours`; for interior repaint walls it lists `0.22` hours per m² for prepare/fill/sand/spot-prime plus 2 coats. Because this calculator applies productivity to coat-adjusted area, `10 m²/hour` equals `0.20` hours per finished m² for 2 coats, close to Resene's `0.22` factor ([Resene Productivity Tables](https://www.resene.com.au/pdf/Productivity_Tables.pdf)). |
+| **Ceiling Labour Productivity** | `7 m²/hour` | Resene lists repaint ceilings in good condition at `0.18` hours per m² for 2 coats. The calculator's `7 m²/hour` on coat-adjusted area equals about `0.286` hours per finished m² for 2 coats, slower than Resene's table and therefore conservative for overhead work ([Resene Productivity Tables](https://www.resene.com.au/pdf/Productivity_Tables.pdf)). |
+| **Labour Hourly Rate** | `$65 AUD / hour` | ServiceSeeking's 2026 Australian house painter pricing guide lists an average hourly rate of `$62.95` and an average day-rate equivalent of `$62.29/hour`; `$65/hour` is a rounded model rate ([ServiceSeeking House Painter Prices 2026](https://www.serviceseeking.com.au/pricing/house-painter-prices-2026-cost-guide?hs_amp=true)). |
+| **Common Paint Tin Sizes** | `15L, 10L, 4L, 2L, 1L` | Bunnings product pages show Dulux Wash&Wear Low Sheen available in `1L`, `2L`, `4L`, `10L`, and `15L`; some ranges also include `0.5L`, while budget/trade ranges may omit `1L` or `2L` ([Dulux Wash&Wear 15L Bunnings product page](https://www.bunnings.com.au/dulux-15l-vivid-white-low-sheen-wash-wear-interior-paint_p0638909)). |
 
 ### Paint Quality Pricing
 
-The price per litre varies based on the selected paint quality level:
+The price per litre varies based on the selected paint quality level. These values are calculator pricing bands, not exact live retail prices. Bunnings prices change and vary by product size, finish, tint base, and store availability.
 
-| Paint Quality | Cost per Litre (AUD) | Product Class Reference |
+| Paint Quality | Calculator Cost per Litre (AUD) | Source & Rationale |
 | :--- | :--- | :--- |
-| **Budget** | `$18.00` | Trade grade or builder's bulk paint (e.g., Dulux Professional / Spring Paint, see [Bunnings Trade Paint](https://www.bunnings.com.au/)). |
-| **Standard** | `$28.00` | Typical retail interior paint (e.g., British Paints or [Taubmans Professional](https://www.bunnings.com.au/brands/taubmans) via Bunnings). |
-| **Premium** | `$40.00` | Premium low-VOC wash-and-wear paint (e.g., [Dulux Wash & Wear](https://www.bunnings.com.au/brands/dulux) via Bunnings). |
+| **Budget** | `$18.00` | Bunnings lists Taubmans 4L White Low Sheen Easycoat All Walls Interior Paint at `$17.99/L`; the calculator rounds this to `$18.00/L` ([Taubmans 4L Easycoat All Walls Interior Paint](https://www.bunnings.com.au/taubmans-4l-white-low-sheen-easycoat-all-walls-interior-paint_p0401018)). |
+| **Standard** | `$28.00` | Bunnings lists Dulux 4L Interior Paint UltraAir Low Sheen Vivid White at `$27.00/L` and Dulux 4L Aquanamel Semi Gloss White at `$29.88/L`; the calculator uses `$28.00/L` as the middle retail band ([Dulux 4L UltraAir Low Sheen](https://www.bunnings.com.au/dulux-4l-interior-paint-ultraair-low-sheen-vivid-white-4l_p0283375); [Dulux 4L Aquanamel Semi Gloss](https://www.bunnings.com.au/dulux-4l-aquanamel-semi-gloss-white-enamel-paint-4l_p1400051)). |
+| **Premium** | `$40.00` | Bunnings lists Dulux 4L Wash&Wear +PLUS Kitchen & Bathroom at `$32.75/L` and the 2L version at `$45.75/L`; the calculator uses `$40.00/L` as a rounded premium interior band between those live SKU prices ([Dulux 4L Wash&Wear +PLUS Kitchen & Bathroom](https://www.bunnings.com.au/dulux-4l-interior-paint-wash-wear-plus-kitchen-bathroom-low-sheen-vivid-white-4l_p1370128); [Dulux 2L Wash&Wear +PLUS Kitchen & Bathroom](https://www.bunnings.com.au/dulux-2l-interior-paint-wash-wear-plus-kitchen-bathroom-low-sheen-vivid-white_p1370127)). |
 
 ---
 
