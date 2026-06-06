@@ -9,10 +9,16 @@ import {
 
 /**
  * Recommends a combination of tin sizes to cover the required raw litres.
+ * Uses an integer knapsack-style dynamic programming solver to find the optimal container combination.
+ *
  * Prioritizes:
- * 1. Sufficiency: Total purchased capacity >= requiredLitres.
- * 2. Minimum Surplus: Minimizes leftover paint.
+ * 1. Sufficiency: Total purchased capacity must be greater than or equal to requiredLitres.
+ * 2. Minimum Surplus: Minimizes leftover paint volume.
  * 3. Fewer Tins: If two combinations have the same surplus, chooses the one with fewer tins.
+ *
+ * @param requiredLitres - The raw required volume of paint in litres
+ * @param tinSizes - Available paint container sizes (e.g. [15, 10, 4, 2, 1])
+ * @returns Array of tin recommendations indicating the count for each tin size
  */
 export function recommendTins(requiredLitres: number, tinSizes: number[]): TinRecommendation[] {
   if (requiredLitres <= 0 || tinSizes.length === 0) return [];
@@ -75,7 +81,7 @@ export function recommendTins(requiredLitres: number, tinSizes: number[]): TinRe
 
   // Group the tins into TinRecommendation format
   const counts: Record<number, number> = {};
-  
+
   // Add base tins if we extracted them
   if (base15LTins > 0) {
     counts[15] = base15LTins;

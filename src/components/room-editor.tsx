@@ -1,5 +1,5 @@
 import React from "react";
-import { Plus, RotateCcw, Trash } from "lucide-react";
+import { Plus, LayoutTemplate, Trash } from "lucide-react";
 import type { RoomInput, RoomEstimate } from "@/types/estimate";
 import { RoomRow } from "@/components/room-row";
 import { Button } from "@/components/ui";
@@ -34,7 +34,7 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
             Configure room dimensions, paint coats, and material qualities.
           </p>
         </div>
-        
+
         <div className="flex gap-2">
           {!isEmpty && (
             <>
@@ -51,7 +51,7 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
                 variant="secondary"
                 title="Load default sample floor plan rooms"
               >
-                <RotateCcw size={14} />
+                <LayoutTemplate size={14} />
                 Load Sample Plan
               </Button>
               <Button
@@ -81,7 +81,7 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
               variant="secondary"
               size="lg"
             >
-              <RotateCcw size={14} />
+              <LayoutTemplate size={14} />
               Load Sample Plan
             </Button>
             <Button
@@ -123,4 +123,3 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
     </div>
   );
 };
-

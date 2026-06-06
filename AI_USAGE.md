@@ -38,4 +38,21 @@ The project was managed through a checklist-driven plan. Each phase was reviewed
 
 ## AI Weaknesses and Corrections
 
+1. **Context management was necessary**
+   - Long AI conversations can drift or lose important project decisions, especially after many small phase reviews.
+   - The workflow needed explicit context management: keeping a checklist, compacting/summarizing the conversation, and restating the current phase before asking an agent to implement or review work.
+   - Prompts also needed to be specific about which files should be edited so the agent did not touch unrelated parts of the project.
 
+2. **AI agents can hallucinate or overstate certainty**
+   - Assumptions, pricing, coverage rates, labour rates, source links, and technical claims were treated as drafts until verified.
+   - This was important because AI can cite weak sources, invent confidence, or describe behavior that is not actually implemented.
+   - The correction was to check assumptions against source links, validate formulas with tests, and review the actual code before accepting a phase.
+
+3. **UI/UX guidance needed to be explicit**
+   - AI suggestions sometimes focused on making the interface look more impressive instead of making it easier for a user to understand.
+   - Layout, copy, empty states, mobile behavior, and visual consistency needed direct review so the app stayed clear and did not overwhelm the user.
+   - The most useful prompts described the intended user experience and consistency rules, not just the component to build.
+
+4. **Implementation still required review**
+   - AI-generated code was not accepted directly. Each phase was checked with available commands such as `npm run lint`, `npm run build`, and `npm test`, plus manual review of the changed files.
+   - Several corrections came from review: keeping the app focused on paint-only estimates, avoiding coding-assessment wording in the app, validating project-level totals, and making documentation claims match the code.

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Plus, RotateCcw } from "lucide-react";
+import { Grid, Plus, LayoutTemplate } from "lucide-react";
 import { Button, Card } from "@/components/ui";
 
 interface ReferenceRoom {
@@ -41,14 +41,14 @@ export const FloorPlanPanel: React.FC<FloorPlanPanelProps> = ({
             Reference dimensions from the standard residential floor plan.
           </p>
         </div>
-        
+
         {showLoadSample && onLoadSamplePlan && (
           <Button
             onClick={onLoadSamplePlan}
             variant="secondary"
             size="sm"
           >
-            <RotateCcw size={12} />
+            <LayoutTemplate size={12} />
             Load Full Sample Plan
           </Button>
         )}

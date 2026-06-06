@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Paintbrush, Calculator, Info, Grid, ShieldCheck, BookOpen } from "lucide-react";
+import { Info, Grid, ShieldCheck, BookOpen } from "lucide-react";
 import type { RoomInput } from "@/types/estimate";
 import { DEFAULT_ROOMS, DEFAULT_ASSUMPTIONS } from "@/lib/defaults";
 import { calculateProjectEstimate } from "@/lib/calculator";
 import { RoomEditor } from "@/components/room-editor";
+import { PigmentaLogo } from "@/components/pigmenta-logo";
 import {
   EstimatePanel,
   FloorPlanPanel,
@@ -79,14 +80,8 @@ export const CalculatorWorkspace: React.FC = () => {
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-start gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-rose-400">
-              <Calculator size={30} strokeWidth={1.5} />
-            </div>
+            <PigmentaLogo className="h-14 w-14 shrink-0 drop-shadow-sm" priority />
             <div>
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-950/60 border border-rose-500/20 px-2.5 py-0.5 text-xs text-rose-300 font-semibold mb-2">
-                <Paintbrush size={12} />
-                <span>Interior Paint Estimator</span>
-              </div>
               <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl bg-clip-text bg-gradient-to-r from-white via-stone-100 to-stone-300">
                 Pigmenta Paint Calculator
               </h1>
@@ -95,8 +90,8 @@ export const CalculatorWorkspace: React.FC = () => {
               </p>
             </div>
           </div>
-          
-          <div className="flex gap-4 self-start md:self-auto border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
+
+          <div className="flex gap-4 justify-center md:justify-start md:self-auto border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
             <div className="text-center min-w-[80px]">
               <span className="block text-[10px] text-rose-300 font-bold uppercase tracking-wider">Rooms</span>
               <span className="text-2xl font-extrabold">{rooms.length}</span>
@@ -112,7 +107,7 @@ export const CalculatorWorkspace: React.FC = () => {
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div className="block lg:hidden space-y-3">
           <EstimatePanel estimate={projectEstimate} compact={true} />
-          
+
           <details className="group">
             <summary className="flex items-center justify-center gap-1.5 py-2 px-4 rounded-lg border border-stone-200 bg-white text-xs font-semibold text-stone-600 hover:text-stone-800 cursor-pointer select-none transition-colors list-none [&::-webkit-details-marker]:hidden">
               <span className="group-open:hidden">Show Detailed Breakdown</span>
@@ -227,5 +222,3 @@ export const CalculatorWorkspace: React.FC = () => {
     </div>
   );
 };
-
-
