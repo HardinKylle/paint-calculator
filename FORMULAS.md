@@ -1,6 +1,6 @@
 # Paint Calculator Formulas & Calculation Logic
 
-This document provides a comprehensive guide to all mathematical formulas and calculation logic used in the Paint Calculator application. These formulas are implemented programmatically in [calculator.ts](file:///d:/Users/Admin/Desktop/repos/paint-calculator/src/lib/calculator.ts).
+This document provides a comprehensive guide to all mathematical formulas and calculation logic used in the Paint Calculator application. These formulas are implemented programmatically in [`src/lib/calculator.ts`](src/lib/calculator.ts).
 
 ---
 
@@ -244,4 +244,3 @@ Using the purchased litres and the price of premium paint ($\$40.00/\text{L}$):
    $$Cost_{paint} = \$280.00 + \$120.00 = \$400.00\text{ AUD}$$
 4. **Total Room Estimate:**
    $$Cost_{total} = Cost_{paint} + Cost_{labour} = \$400.00 + \$933.00 = \$1,333.00\text{ AUD}$$
-
