@@ -16,7 +16,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           "inline-flex items-center justify-center gap-1.5 rounded-lg transition-all duration-200 font-medium cursor-pointer",
           variant === "primary" &&
-            "bg-gradient-to-r from-rose-500 to-orange-500 text-white hover:from-rose-600 hover:to-orange-600 shadow-xs border-0 font-semibold",
+            "bg-gradient-to-r from-rose-600 to-rose-500 text-white hover:from-rose-700 hover:to-rose-600 shadow-xs border-0 font-semibold",
           variant === "secondary" &&
             "border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 transition-colors",
           variant === "destructive" &&
