@@ -49,20 +49,20 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
               <button
                 onClick={onResetToDefaults}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 bg-white py-1.5 px-3 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors cursor-pointer"
-                title="Reset to default sample floor plan rooms"
+                title="Load default sample floor plan rooms"
               >
                 <RotateCcw size={14} />
-                Reset to Sample Plan
+                Load Sample Plan
+              </button>
+              <button
+                onClick={onRoomAdd}
+                className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-rose-500 to-orange-500 py-1.5 px-4 text-xs font-semibold text-white hover:from-rose-600 hover:to-orange-600 transition-all shadow-xs cursor-pointer border-0"
+              >
+                <Plus size={14} />
+                Add Room
               </button>
             </>
           )}
-          <button
-            onClick={onRoomAdd}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-rose-500 to-orange-500 py-1.5 px-4 text-xs font-semibold text-white hover:from-rose-600 hover:to-orange-600 transition-all shadow-xs cursor-pointer border-0"
-          >
-            <Plus size={14} />
-            Add Room
-          </button>
         </div>
       </div>
 
@@ -109,6 +109,15 @@ export const RoomEditor: React.FC<RoomEditorProps> = ({
               />
             );
           })}
+
+          {/* Quick Add button at the bottom of the list */}
+          <button
+            onClick={onRoomAdd}
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border-2 border-dashed border-stone-200 hover:border-rose-300 hover:bg-rose-50/10 text-stone-500 hover:text-rose-600 transition-all font-semibold text-xs cursor-pointer bg-transparent mt-2"
+          >
+            <Plus size={14} />
+            Add Another Room
+          </button>
         </div>
       )}
     </div>
