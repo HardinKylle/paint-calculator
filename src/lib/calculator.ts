@@ -93,10 +93,10 @@ export function recommendTins(requiredLitres: number, tinSizes: number[]): TinRe
     }));
 }
 
-/**
- * Calculates wall and ceiling areas for a room.
- */
 export function calculateRoomAreas(room: { length: number; width: number; ceilingHeight: number }) {
+  if (!room.length || !room.width || !room.ceilingHeight || room.length <= 0 || room.width <= 0 || room.ceilingHeight <= 0) {
+    return { wallAreaM2: 0, ceilingAreaM2: 0 };
+  }
   const wallAreaM2 = 2 * (room.length + room.width) * room.ceilingHeight;
   const ceilingAreaM2 = room.length * room.width;
   return { wallAreaM2, ceilingAreaM2 };

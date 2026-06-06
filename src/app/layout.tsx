@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Paint Calculator",
+  title: "Pigmenta - Paint Calculator",
   description:
     "Residential interior wall and ceiling paint estimate calculator.",
 };
